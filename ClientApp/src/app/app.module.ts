@@ -1,14 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {RouterModule} from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import {AppComponent} from './app.component';
+import {NavMenuComponent} from './components/nav-menu/nav-menu.component';
+import {HomeComponent} from './components/home/home.component';
 import {BookService} from "./services/book.service";
 import {BooksComponent} from "./components/books/books.component";
 import {DeleteBookComponent} from "./components/delete-book/delete-book.component";
@@ -21,8 +19,6 @@ import {UpdateBookComponent} from "./components/update-book/update-book.componen
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     BooksComponent,
     DeleteBookComponent,
     NewBookComponent,
@@ -31,16 +27,20 @@ import {UpdateBookComponent} from "./components/update-book/update-book.componen
 
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'books', component: BooksComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      {path: '', component: HomeComponent, pathMatch: 'full'},
+      {path: 'books', component: BooksComponent},
+      {path: 'new-book', component: NewBookComponent},
+      {path: 'update-book/:id', component: UpdateBookComponent},
+      {path: 'delete-book/:id', component: DeleteBookComponent},
+      {path: 'show-book/:id', component: ShowBookComponent}
     ])
   ],
   providers: [BookService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
