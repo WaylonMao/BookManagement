@@ -25,4 +25,13 @@ export class BooksComponent {
     this.router.navigate(["/show-book/" + id]);
   }
 
+  updateBook(id: number) {
+    this.router.navigate(["/update-book/" + id]);
+  }
+
+  deleteBook(id: number) {
+    this.router.navigate(["/delete-book/" + id]);
+  }
+
+
 }
