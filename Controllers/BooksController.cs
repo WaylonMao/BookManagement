@@ -22,7 +22,7 @@ namespace BookManagement.Controllers
         public IActionResult AddBook([FromBody] Book book)
         {
             _bookService.AddBook(book);
-            return Ok("Added Successfully");
+            return Ok();
         }
 
         // Get all books
