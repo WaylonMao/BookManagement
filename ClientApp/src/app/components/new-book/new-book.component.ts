@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class NewBookComponent {
 
   addBookForm: FormGroup = new FormGroup({});
+  showError: boolean = false;
 
   constructor(private service: BookService, private fb: FormBuilder, private router: Router) {
   }
@@ -20,7 +21,7 @@ export class NewBookComponent {
       id: [Math.floor(Math.random() * 1000)],
       title: [null, Validators.required],
       author: [null, Validators.required],
-      description: [null, Validators.compose([Validators.required, Validators.minLength(30)])],
+      description: [null, Validators.compose([Validators.required, Validators.minLength(20)])],
       rate: [null],
       dateStart: [null],
       dateRead: [null],
@@ -30,6 +31,8 @@ export class NewBookComponent {
   onSubmit() {
     this.service.addBook(this.addBookForm.value).subscribe(data => {
       this.router.navigate(["/books"]);
+    }, error => {
+      this.showError = true;
     })
   }
 }

@@ -21,8 +21,28 @@ namespace BookManagement.Controllers
         [HttpPost("AddBook")]
         public IActionResult AddBook([FromBody] Book book)
         {
-            _bookService.AddBook(book);
-            return Ok();
+            try
+            {
+                if (book.Author != null && book.Title != null && book.Description != null)
+                {
+                    int lastBookId = 0;
+                    if (_bookService.GetAllBooks().LastOrDefault() != null)
+                    {
+                        lastBookId = _bookService.GetAllBooks().LastOrDefault()!.Id;
+                    }
+
+                    book.Id = lastBookId + 1;
+
+                    _bookService.AddBook(book);
+                    return Ok(book);
+                }
+
+                return BadRequest("Book was not added");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // Get all books
